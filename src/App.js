@@ -158,7 +158,7 @@ function App() {
           }
           .generate-button {
             height: 40px;
-            width: 30%;
+            width: 100%;
           }
           .small-button {
             font-size: 12px;
