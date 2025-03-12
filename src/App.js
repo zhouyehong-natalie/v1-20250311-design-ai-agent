@@ -41,7 +41,12 @@ function App() {
         },
         body: JSON.stringify({
           model: "gpt-4o",
-          messages: [{ role: "system", content: fullPrompt }]
+          messages: [{ role: "system", content: fullPrompt }],
+          max_tokens: 1000,
+          temperature: 0.7,
+          top_p: 1,
+          frequency_penalty: 0.2,
+          presence_penalty: 0.3
         })
       });
 
@@ -54,6 +59,7 @@ function App() {
       setLoading(false);
     }
   };
+
 
   return (
     <div className="app-container">
