@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/v1-20250311-design-ai-agent/static/css/main.e6c13ad2.css",
-    "main.js": "/v1-20250311-design-ai-agent/static/js/main.d73fd9a1.js",
+    "main.js": "/v1-20250311-design-ai-agent/static/js/main.6001ff41.js",
     "static/js/453.fba7b507.chunk.js": "/v1-20250311-design-ai-agent/static/js/453.fba7b507.chunk.js",
     "index.html": "/v1-20250311-design-ai-agent/index.html",
     "main.e6c13ad2.css.map": "/v1-20250311-design-ai-agent/static/css/main.e6c13ad2.css.map",
-    "main.d73fd9a1.js.map": "/v1-20250311-design-ai-agent/static/js/main.d73fd9a1.js.map",
+    "main.6001ff41.js.map": "/v1-20250311-design-ai-agent/static/js/main.6001ff41.js.map",
     "453.fba7b507.chunk.js.map": "/v1-20250311-design-ai-agent/static/js/453.fba7b507.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.e6c13ad2.css",
-    "static/js/main.d73fd9a1.js"
+    "static/js/main.6001ff41.js"
   ]
 }
