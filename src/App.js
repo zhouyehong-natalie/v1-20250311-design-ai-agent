@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { db, collection, addDoc, doc, updateDoc } from "./firebase"; // ✅ 确保正确引入
+import { db, collection, addDoc, getDocs, doc, updateDoc } from "./firebase";
 
 function App() {
   const [designerRole, setDesignerRole] = useState("");
@@ -7,9 +7,9 @@ function App() {
   const [customPrompt, setCustomPrompt] = useState("");
   const [apiKey, setApiKey] = useState("");
   const [designGuide, setDesignGuide] = useState("");
-  const [notes, setNotes] = useState(""); // ✅ 备注框
+  const [notes, setNotes] = useState("");
   const [loading, setLoading] = useState(false);
-  const [lastDocId, setLastDocId] = useState(null); // ✅ 存储最后生成的文档 ID
+  const [lastDocId, setLastDocId] = useState(null);
 
   const addUserProfile = () => {
     setUserProfiles([...userProfiles, ""]);
@@ -25,7 +25,6 @@ function App() {
     navigator.clipboard.writeText(designGuide);
   };
 
-  // 🔥 调用 GPT 并存入 Firebase Firestore
   const callGPT4oAPI = async () => {
     if (!apiKey) {
       setDesignGuide("Please provide OpenAI API Key.");
@@ -46,7 +45,7 @@ function App() {
         body: JSON.stringify({
           model: "gpt-4o",
           messages: [{ role: "system", content: fullPrompt }],
-          max_tokens: 1000,
+          max_tokens: 2000,
           temperature: 0.7,
           top_p: 1,
           frequency_penalty: 0.2,
@@ -58,15 +57,14 @@ function App() {
       const outputText = data.choices[0]?.message?.content || "Generation failed, please check API request.";
       setDesignGuide(outputText);
 
-      // ✅ 存入 Firestore
       const docRef = await addDoc(collection(db, "gpt_interactions"), {
         timestamp: new Date().toISOString(),
         input: fullPrompt,
         output: outputText,
-        notes: "" // 初始存入空的 notes
+        notes: ""
       });
-      setLastDocId(docRef.id); // ✅ 存储文档 ID
 
+      setLastDocId(docRef.id);
     } catch (error) {
       console.error("❌ API 请求错误:", error);
       setDesignGuide("API request failed, please check network or API Key.");
@@ -75,7 +73,6 @@ function App() {
     }
   };
 
-  // ✅ 备注存入 Firebase
   const saveNotes = async () => {
     if (!lastDocId) {
       alert("❌ 请先生成 Design Guide 才能添加备注！");
@@ -133,8 +130,8 @@ function App() {
         </div>
 
         <div className="right-section expanded">
-          <h2>Design Guide
-            <button className="copy-button" onClick={copyToClipboard}>Copy</button>
+          <h2 className="guide-header">
+            Design Guide <span className="copy-text" onClick={copyToClipboard}>Copy</span>
           </h2>
           <textarea className="design-guide-box"
             readOnly
@@ -142,8 +139,8 @@ function App() {
             placeholder="The design guide will be generated here..."
           />
 
-          <h2>Notes
-            <button className="copy-button" onClick={saveNotes}>Save</button>
+          <h2 className="notes-header">
+            Notes <span className="copy-text" onClick={saveNotes}>Save</span>
           </h2>
           <textarea
             className="notes-box"
@@ -173,19 +170,12 @@ function App() {
             align-items: center;
             height: 100vh;
           }
-          .page-title {
-            text-align: center;
-            font-size: 18px;
-            margin-top: 10px;
-            color: #ffffff;
-          }
           .container {
             display: flex;
             width: 90vw;
             height: 90vh;
             background: #1e1e1e;
             border-radius: 10px;
-            box-shadow: 0px 4px 10px rgba(255, 255, 255, 0.1);
             overflow: hidden;
           }
           .left-section {
@@ -205,35 +195,26 @@ function App() {
             min-height: 250px;
           }
           .notes-box {
-            min-height: 50px; /* ✅ Notes 高度调整为 Design Guide 的 1/5 */
-          }
-          .full-width {
-            width: 100%;
+            min-height: 50px;
           }
           .generate-button {
             height: 40px;
             width: 100%;
             background: #bb86fc;
-          }
-          .small-button {
-            font-size: 12px;
-            height: 40px;
-            width: 30%;
-            padding: 5px 15px;
-            background: #bb86fc;
-          }
-          .copy-button {
-            font-size: 14px;
-            padding: 3px 8px;
-            background: #bb86fc;
-            color: white;
             border: none;
-            border-radius: 5px;
+            color: white;
             cursor: pointer;
           }
-          h2 {
-            color: #bb86fc;
-            font-size: 18px;
+          .guide-header, .notes-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+          }
+          .copy-text {
+            font-size: 14px;
+            color: #ffffff;
+            cursor: pointer;
+            margin-left: 10px;
           }
         `}
       </style>
