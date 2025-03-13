@@ -110,7 +110,7 @@ function App() {
               onChange={(e) => updateUserProfile(index, e.target.value)}
             />
           ))}
-          <button className="small-button" onClick={addUserProfile}>Add User Profile</button>
+          <button className="full-width generate-button" onClick={addUserProfile}>Add User Profile</button>
           <h2>Custom Prompt</h2>
           <textarea
             placeholder="Enter custom Prompt..."
@@ -170,12 +170,19 @@ function App() {
             align-items: center;
             height: 100vh;
           }
+          .page-title {
+            text-align: center;
+            font-size: 18px;
+            margin-top: 10px;
+            color: #ffffff;
+          }
           .container {
             display: flex;
             width: 90vw;
             height: 90vh;
             background: #1e1e1e;
             border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(255, 255, 255, 0.1);
             overflow: hidden;
           }
           .left-section {
@@ -195,13 +202,17 @@ function App() {
             min-height: 250px;
           }
           .notes-box {
-            min-height: 50px;
+            min-height: 50px; /* ✅ Notes 高度调整为 Design Guide 的 1/5 */
+          }
+          .full-width {
+            width: 100%;
           }
           .generate-button {
             height: 40px;
             width: 100%;
             background: #bb86fc;
             border: none;
+            border-radius: 5px;
             color: white;
             cursor: pointer;
           }
@@ -216,10 +227,22 @@ function App() {
             cursor: pointer;
             margin-left: 10px;
           }
+          h2 {
+            color: #bb86fc;
+            font-size: 18px;
+          }
+          textarea, input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: none;
+            border-radius: 5px;
+            background: #333;
+            color: #fff;
+          }
         `}
       </style>
     </div>
   );
 }
-
 export default App;
