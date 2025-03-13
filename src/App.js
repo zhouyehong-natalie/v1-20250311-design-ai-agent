@@ -57,14 +57,15 @@ function App() {
       setDesignGuide(outputText);
 
       // ✅ 存入 Firestore
-      await addDoc(collection(db, "gpt_interactions"), {
+      const docRef = await addDoc(collection(db, "gpt_interactions"), {
         timestamp: new Date().toISOString(),
         input: fullPrompt,
         output: outputText
       });
+      console.log("🔥 数据存入成功！文档 ID：", docRef.id);
 
     } catch (error) {
-      console.error("API Request Error", error);
+      console.error("❌ API 请求错误:", error);
       setDesignGuide("API request failed, please check network or API Key.");
     } finally {
       setLoading(false);
@@ -179,7 +180,7 @@ function App() {
           .small-button {
             font-size: 12px;
             height: 40px;
-            width: 30%;
+            width: 60%;
             padding: 5px 15px;
           }
           .copy-button {
@@ -197,7 +198,7 @@ function App() {
             font-size: 18px;
           }
           textarea, input {
-            width: 100%;
+            width: 60%;
             padding: 10px;
             margin-bottom: 10px;
             border: none;
