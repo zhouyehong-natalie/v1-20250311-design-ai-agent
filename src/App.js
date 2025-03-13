@@ -110,7 +110,7 @@ function App() {
               onChange={(e) => updateUserProfile(index, e.target.value)}
             />
           ))}
-          <button className="full-width generate-button" onClick={addUserProfile}>Add User Profile</button>
+          <button className="small-button" onClick={addUserProfile}>Add User Profile</button>
           <h2>Custom Prompt</h2>
           <textarea
             placeholder="Enter custom Prompt..."
@@ -130,8 +130,8 @@ function App() {
         </div>
 
         <div className="right-section expanded">
-          <h2 className="guide-header">
-            Design Guide <span className="copy-text" onClick={copyToClipboard}>Copy</span>
+          <h2>Design Guide
+            <button className="copy-button" onClick={copyToClipboard}>Copy</button>
           </h2>
           <textarea className="design-guide-box"
             readOnly
@@ -139,8 +139,8 @@ function App() {
             placeholder="The design guide will be generated here..."
           />
 
-          <h2 className="notes-header">
-            Notes <span className="copy-text" onClick={saveNotes}>Save</span>
+          <h2>Notes
+            <button className="copy-button" onClick={saveNotes}>Save</button>
           </h2>
           <textarea
             className="notes-box"
@@ -174,7 +174,7 @@ function App() {
             text-align: center;
             font-size: 18px;
             margin-top: 10px;
-            color: #ffffff;
+            color: #bb86fc; /* ✅ 标题颜色与 V1 保持一致 */
           }
           .container {
             display: flex;
@@ -210,25 +210,34 @@ function App() {
           .generate-button {
             height: 40px;
             width: 100%;
-            background: #bb86fc;
+            background: #bb86fc; /* ✅ 统一按钮颜色 */
             border: none;
             border-radius: 5px;
             color: white;
             cursor: pointer;
           }
-          .guide-header, .notes-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-          }
-          .copy-text {
-            font-size: 14px;
-            color: #ffffff;
+          .small-button {
+            font-size: 12px;
+            height: 40px;
+            width: 30%;
+            padding: 5px 15px;
+            background: #bb86fc; /* ✅ 统一按钮颜色 */
+            border: none;
+            border-radius: 5px;
+            color: white;
             cursor: pointer;
-            margin-left: 10px;
+          }
+          .copy-button {
+            font-size: 14px;
+            padding: 3px 8px;
+            background: #bb86fc; /* ✅ 统一按钮颜色 */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
           }
           h2 {
-            color: #bb86fc;
+            color: #bb86fc; /* ✅ 标题颜色一致 */
             font-size: 18px;
           }
           textarea, input {
@@ -237,7 +246,7 @@ function App() {
             margin-bottom: 10px;
             border: none;
             border-radius: 5px;
-            background: #333;
+            background: #333; /* ✅ 输入框底色与 V1 保持一致 */
             color: #fff;
           }
         `}
@@ -245,4 +254,5 @@ function App() {
     </div>
   );
 }
+
 export default App;
