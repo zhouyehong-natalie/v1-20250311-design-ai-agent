@@ -180,7 +180,7 @@ function App() {
           .small-button {
             font-size: 12px;
             height: 40px;
-            width: 60%;
+            width: 30%;
             padding: 5px 15px;
           }
           .copy-button {
@@ -198,7 +198,7 @@ function App() {
             font-size: 18px;
           }
           textarea, input {
-            width: 60%;
+            width: 100%;
             padding: 10px;
             margin-bottom: 10px;
             border: none;
